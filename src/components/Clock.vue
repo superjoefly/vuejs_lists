@@ -1,0 +1,47 @@
+<template>
+
+  <div class="w3-container w3-xlarge">
+    <p id="timeclock"></p>
+    <p id="date">test</p>
+  </div>
+
+
+</template>
+
+<script>
+
+export default {
+  methods: {
+    startTime() {
+      var today = new Date();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = this.checkTime(m);
+      s = this.checkTime(s);
+      document.getElementById("timeclock").innerHTML =
+      h + ":" + m + ":" + s;
+      var t = setTimeout(this.startTime, 500);
+    },
+    checkTime(i) {
+      if (i < 10) {
+        i = "0" + i
+      };
+      return i;
+    },
+    showDate() {
+      var d = new Date();
+      var n = d.toDateString();
+      document.getElementById("date").innerHTML = n;
+    }
+  },
+
+  mounted() {
+    this.startTime();
+    this.showDate();
+  }
+}
+
+</script>
+
+<style></style>

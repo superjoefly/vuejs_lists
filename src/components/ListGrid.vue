@@ -1,15 +1,15 @@
 <template>
-  <div class="w3-row-padding">
+  <div class="w3-container">
 
 
-    <h3>Click on a list or click 'Clear Lists' to clear the lists!</h3>
+    <h3>Click on an item to delete or click "Clear" to clear the list!</h3>
 
     <!-- Render List.vue -->
     <app-list
-    v-for="list in lists"
-    key="listId"
+    v-for="(item, index) in list"
+    key="itemId"
     style="white-space: pre-wrap; text-align: left"
-    @click.native="deleteList">{{ list }}</app-list>
+    @click.native="deleteItem">{{index + 1}} : {{ item }}</app-list>
 
   </div>
 </template>
@@ -18,17 +18,17 @@
   import List from './List.vue';
 
   export default {
-    props: ['lists'],
+    props: ['list'],
 
     data() {
       return {
-        listsPresent: true
+        // listsPresent: true
       }
     },
 
     methods: {
-      deleteList(index) {
-        this.$emit('listDeleted', index);
+      deleteItem(index) {
+        this.$emit('itemDeleted', index);
       }
     },
 

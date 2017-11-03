@@ -1,25 +1,21 @@
 <template>
   <div class="w3-container w3-center w3-dark-grey" style="height: 100%;">
 
-    <h3>Todo List App</h3>
+    <app-clock></app-clock>
 
-    <!-- Render AddList.vue -->
     <app-add-list
-    @listAdded="addLists"
-    @listRemoved="removeList"
-    @listsCleared="removeLists"
-    :lists="lists"
-
-    @listsUploaded="loadLists"
+    @itemAdded="addTodoItem"
+    @itemsCleared="removeItems"
+    @listUploaded="showList"
+    :list="list"
     ></app-add-list>
+
 
     <!-- Render ListGrid.vue -->
     <app-list-grid
-    :lists="lists"
-    @listDeleted="removeList"
+    :list="list"
+    @itemDeleted="removeItem"
     ></app-list-grid>
-
-    <app-clock></app-clock>
 
   </div>
 </template>
@@ -39,22 +35,22 @@
 
     data() {
       return {
-        lists: []
+        list: []
       }
     },
 
     methods: {
-      addLists(list) {
-        this.lists.push(list);
+      addTodoItem(item) {
+        this.list.push(item);
       },
-      removeList(index) {
-        this.lists.splice(index, 1);
+      removeItems() {
+        this.list = [];
       },
-      loadLists(resultArray) {
-        this.lists = resultArray;
+      removeItem(index) {
+        this.list.splice(index, 1);
       },
-      removeLists() {
-        this.lists = [];
+      showList(resultArray) {
+        this.list = resultArray;
       }
     }
 

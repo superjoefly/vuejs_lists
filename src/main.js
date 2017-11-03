@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import App from './App.vue';
 
 
 
@@ -11,8 +11,7 @@ Vue.http.options.root = 'https://to-do-app-64a1c.firebaseio.com/';
 
 
 
-
 new Vue({
   el: '#app',
   render: h => h(App)
-})
+});

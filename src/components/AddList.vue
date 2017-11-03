@@ -2,19 +2,25 @@
   <div class="w3-container w3-light-grey">
     <p>Add some items to the textarea and click the 'Create List' button to add a list!</p>
 
-    <textarea rows="5" cols="50" class="w3-card-4 animated jello" v-model="list" placeholder="1. Learn Vue.js!..."></textarea>
+    <input class="w3-input animated jello" v-model="item" placeholder="1. Learn Vue.js!..." @keyup.enter="addItem"></input>
 
     <div class="w3-container w3-margin">
 
-      <button class="w3-button w3-blue w3-round" @click="addList">Create List</button>
+      <button class="w3-button w3-blue w3-round" @click="addItem">Add</button>
 
-      <button class="w3-button w3-green w3-round" @click="saveLists"
-      >Save Lists</button>
+      <button class="w3-button w3-yellow w3-round" @click="clearItems">Clear</button>
 
-      <button class="w3-button w3-yellow w3-round" @click="clearLists">Clear Lists</button>
+      <button class="w3-button w3-green w3-round" @click="saveList"
+      >Save</button>
 
       <button class="w3-button w3-orange w3-round"
-      @click="getLists">Load Lists</button>
+      @click="getList">Load</button>
+
+      <p class="w3-text-green">Don't forget to save your list!</p>
+
+      <div class="w3-panel w3-pale-green w3-large message" v-if="saved">
+        <p>{{message}}</p>
+      </div>
 
     </div>
 
@@ -24,88 +30,88 @@
 
 <script>
   export default {
-    props: ['lists'],
+    props: ['list'],
 
     data() {
       return {
-      list: ''
+      item: '',
+      message: '',
+      saved: false
     }
   },
 
     methods: {
-      addList() {
-        if(this.list == '') {
+      addItem() {
+        if(this.item == '') {
           event.preventDefault();
         } else {
-          this.$emit('listAdded', this.list);
-          this.list = '';
+          this.$emit('itemAdded', this.item);
+          this.item = '';
         }
       },
 
-      clearLists() {
-        this.$emit('listsCleared');
+      clearItems() {
+        this.$emit('itemsCleared');
       },
 
-      saveLists() {
+      hideMessage() {
+        var vm = this;
+        setTimeout(function() {
+          vm.saved = false;
+        }, 3000)
+      },
+
+      saveList() {
+        this.message = 'List Saved!';
+        this.saved = true;
         const data = {
-          dbLists: this.lists
+          dbList: this.list
         };
         this.$http.put('data.json', data);
+        this.hideMessage();
       },
 
-      // Using Post with Get Overwrites the data and only returns the last object.
-
-      // getLists() {
-      //   this.$http.get('data.json').then(response => {
-      //     return response.json();
-      //   })
-      //
-      //   .then(data => {
-      //     for (let key in data) {
-      //     const resultArray = data[key].dbLists;
-      //     this.$emit('listsUploaded', resultArray);
-      //   }
-      //
-      //   })
-      // }
-
-
-      getLists() {
+      getList() {
         this.$http.get('data.json')
         .then(response => {
           return response.json();
         })
 
         .then(data => {
-          const resultArray = data.dbLists;
-          this.$emit('listsUploaded', resultArray);
+          const resultArray = data.dbList;
+          this.$emit('listUploaded', resultArray);
         })
       }
     },
 
-    created() {
-      this.saveLists();
-    }
+    // Overwrite dbLists with empty lists to clear database
+    // created() {
+    //   this.saveLists();
+    // }
   }
 </script>
 
 <style scoped>
 
-textarea {
-  background: url("http://i.stack.imgur.com/ynxjD.png") repeat-y;
-  font-size: 18px;
-  font-family: 'Gloria Hallelujah', cursive;
-  width: 100%;
-}
-
-@media all and (min-width: 800px) {
-  textarea {
-    width: 50%;
-  }
-}
-
 .w3-button {
   margin: 5px;
 }
 
+.message {
+  position: absolute;
+  right: 20px;
+  top: 50px;
+  z-index: 10;
+  width: 50%;
+  animation: flash-message 3s forwards;
+}
+
+@keyframes flash-message {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0; display: none;
+  }
+}
 </style>

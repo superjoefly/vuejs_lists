@@ -2,16 +2,16 @@
   <div class="w3-container w3-light-grey">
     <p>Add some items to the textarea and click the 'Create List' button to add a list!</p>
 
-    <input class="w3-input animated jello" v-model="item" placeholder="1. Learn Vue.js!..." @keyup.enter="addItem"></input>
+    <input class="w3-input animated jello" v-model="item.name" placeholder="1. Learn Vue.js!..." @keyup.enter="addItem" @focus="clearError"></input>
 
     <div class="w3-container w3-margin">
 
       <button class="w3-button w3-blue w3-round" @click="addItem">Add</button>
 
-      <button class="w3-button w3-yellow w3-round" @click="clearItems">Clear</button>
-
       <button class="w3-button w3-green w3-round" @click="saveList"
       >Save</button>
+
+      <button class="w3-button w3-yellow w3-round" @click="clearItems">Clear</button>
 
       <button class="w3-button w3-orange w3-round"
       @click="getList">Load</button>
@@ -21,6 +21,8 @@
       <div class="w3-panel w3-pale-green w3-large message" v-if="saved">
         <p>{{message}}</p>
       </div>
+
+      <p v-if="error" class="w3-text-red w3-small">{{error}}</p>
 
     </div>
 
@@ -34,24 +36,42 @@
 
     data() {
       return {
-      item: '',
+      item: {
+        name: '',
+        completed: false
+      },
       message: '',
-      saved: false
+      saved: false,
+      error: ''
     }
   },
 
     methods: {
+      reset() {
+        this.item = {
+          name: '',
+          completed: false
+        }
+      },
+
+      clearError() {
+        this.error = '';
+      },
+
       addItem() {
-        if(this.item == '') {
+        if(this.item.name == '') {
           event.preventDefault();
         } else {
-          this.$emit('itemAdded', this.item);
-          this.item = '';
+          let item = this.item;
+          this.$emit('itemAdded', item);
+          this.reset();
+          this.clearError();
         }
       },
 
       clearItems() {
         this.$emit('itemsCleared');
+        this.clearError();
       },
 
       hideMessage() {
@@ -78,8 +98,12 @@
         })
 
         .then(data => {
-          const resultArray = data.dbList;
-          this.$emit('listUploaded', resultArray);
+            const resultArray = data.dbList;
+            this.$emit('listUploaded', resultArray);
+        })
+
+        .catch(error => {
+          this.error = 'No Items In List!';
         })
       }
     },

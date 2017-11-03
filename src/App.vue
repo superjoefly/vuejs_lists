@@ -4,7 +4,7 @@
     <app-clock></app-clock>
 
     <app-add-list
-    @itemAdded="addTodoItem"
+    @itemAdded="addItem"
     @itemsCleared="removeItems"
     @listUploaded="showList"
     :list="list"
@@ -14,6 +14,7 @@
     <!-- Render ListGrid.vue -->
     <app-list-grid
     :list="list"
+    @itemCompleted="markItem"
     @itemDeleted="removeItem"
     ></app-list-grid>
 
@@ -40,7 +41,7 @@
     },
 
     methods: {
-      addTodoItem(item) {
+      addItem(item) {
         this.list.push(item);
       },
       removeItems() {
@@ -49,6 +50,10 @@
       removeItem(index) {
         this.list.splice(index, 1);
       },
+      markItem(index) {
+        console.log('Marked!');
+        console.log(this.list[index]);
+      },
       showList(resultArray) {
         this.list = resultArray;
       }
@@ -56,3 +61,7 @@
 
   }
 </script>
+
+<style scoped>
+
+</style>

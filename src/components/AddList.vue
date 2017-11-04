@@ -1,37 +1,60 @@
 <template>
-  <div class="w3-container w3-light-grey">
-    <p>Add some items to the textarea and click the 'Create List' button to add a list!</p>
+  <div class="w3-light-grey" style="height: 100%;">
+
+    <!-- Render Clock Component -->
+    <app-clock></app-clock>
 
     <input class="w3-input animated jello" v-model="item.name" placeholder="1. Learn Vue.js!..." @keyup.enter="addItem" @focus="clearError"></input>
 
-    <div class="w3-container w3-margin">
+    <div class="w3-grey w3-bar" style="width: 100%;">
+      <button class="w3-button w3-blue" @click="addItem">Add</button>
 
-      <button class="w3-button w3-blue w3-round" @click="addItem">Add</button>
-
-      <button class="w3-button w3-green w3-round" @click="saveList"
+      <button class="w3-button w3-green" @click="saveList"
       >Save</button>
 
-      <button class="w3-button w3-yellow w3-round" @click="clearItems">Clear</button>
+      <button class="w3-button w3-yellow" @click="clearItems">Clear</button>
 
-      <button class="w3-button w3-orange w3-round"
+      <button class="w3-button w3-orange"
       @click="getList">Load</button>
+    </div>
+
+    <div class="w3-container">
+
+      <button class="w3-button w3-left w3-hover-teal" @click="showCompleted">Completed</button>
+      <button class="w3-button w3-right w3-hover-teal">Incomplete</button>
+
+      <br><br />
 
       <p class="w3-text-green">Don't forget to save your list!</p>
 
-      <div class="w3-panel w3-pale-green w3-large message" v-if="saved">
+      <div class="w3-panel w3-green w3-large message" v-if="saved">
         <p>{{message}}</p>
       </div>
 
       <p v-if="error" class="w3-text-red w3-small">{{error}}</p>
 
-    </div>
+      <!-- Render ListGrid.vue -->
+      <app-list-grid
+      :list="itemList"
+      @itemCompleted="markItem"
+      @itemDeleted="removeItem"
+      ></app-list-grid>
 
+    </div>
 
   </div>
 </template>
 
 <script>
+  import Clock from './Clock.vue';
+  import ListGrid from './ListGrid.vue';
+
   export default {
+    components: {
+      appClock: Clock,
+
+      appListGrid: ListGrid
+    },
     props: ['list'],
 
     data() {
@@ -45,6 +68,12 @@
       error: ''
     }
   },
+
+    computed: {
+      itemList() {
+        return this.list;
+      }
+    },
 
     methods: {
       reset() {
@@ -105,28 +134,38 @@
         .catch(error => {
           this.error = 'No Items In List!';
         })
+      },
+
+
+      removeItem(index) {
+        this.list.splice(index, 1);
+      },
+      markItem(index) {
+        console.log('Marked!');
+        console.log(this.list[index]);
+      },
+
+      showCompleted() {
+        //
       }
     },
 
     // Overwrite dbLists with empty lists to clear database
     // created() {
-    //   this.saveLists();
+    //   this.saveList();
     // }
   }
 </script>
 
 <style scoped>
 
-.w3-button {
-  margin: 5px;
-}
-
 .message {
   position: absolute;
-  right: 20px;
-  top: 50px;
+  left: 50%;
+  top: 50%;
   z-index: 10;
   width: 50%;
+  transform: translate(-50%, -50%);
   animation: flash-message 3s forwards;
 }
 
@@ -138,4 +177,5 @@
     opacity: 0; display: none;
   }
 }
+
 </style>

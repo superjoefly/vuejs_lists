@@ -1,8 +1,8 @@
 <template>
 
-  <div class="w3-xlarge">
-    <p id="date"></p>
-    <p id="timeclock"></p>
+  <div class="w3-padding w3-text-blue">
+    <span id="date"></span>
+    <span id="timeclock"></span>
   </div>
 
 

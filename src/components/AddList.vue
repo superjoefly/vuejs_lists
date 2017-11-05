@@ -120,7 +120,11 @@
       getList() {
         let listItems = JSON.parse(localStorage.getItem('storedList'));
 
-        this.$emit('updateList', listItems);
+        if (listItems = []) {
+          this.error = 'No items in storage!';
+        } else {
+          this.$emit('updateList', listItems);
+        }
       },
 
 

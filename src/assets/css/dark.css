@@ -1,3 +1,8 @@
+.toggle-theme-button {
+  background-color: teal !important;
+  color: white !important;
+}
+
 /*AddList.vue*/
 .message {
   position: absolute;
@@ -25,7 +30,7 @@
 .buttons {
   width: 33.33%;
   float: left;
-  background-color: #616161 !important;
+  background-color: teal !important;
   color: white !important;
 }
 
@@ -39,7 +44,7 @@
 }
 
 .save {
-  background-color: #616161 !important;
+  background-color: teal !important;
 }
 
 /*List.vue*/
@@ -75,4 +80,10 @@
 span:hover:not(.clock) {
   cursor: pointer;
   color: white;
+}
+
+.clock {
+  display: inline-block;
+  padding: 5px;
+  color: teal !important;
 }

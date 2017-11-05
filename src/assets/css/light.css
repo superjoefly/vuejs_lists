@@ -1,7 +1,4 @@
-/*App.vue*/
-.container {
-  background-color: white !important;
-}
+
 
 /*AddList.vue*/
 .message {
@@ -74,5 +71,5 @@ span:hover:not(.clock) {
 
 .clock {
   display: inline-block;
-  padding-top: 8px;
+  padding: 5px;
 }

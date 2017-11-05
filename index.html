@@ -23,9 +23,37 @@
     <script src="https://cdn.jsdelivr.net/velocity/1.5/velocity.ui.min.js"></script>
 
   </head>
-  <body style="min-height: 100vh;">
+  <body>
+    <div class="w3-top">
+      <button id="toggle" class="w3-button w3-bar w3-pale-green toggle-theme-button" onclick="swapStyles()">Light</button>
+    </div>
+
+
     <div id="app"></div>
+
+
+
+
+
+
+
+
     <script src="./dist/build.js"></script>
+
+    <script>
+      function swapStyles() {
+        let toggle = document.getElementById('toggle');
+        let stylesheet = document.getElementById('stylesheet');
+
+        if (stylesheet.getAttribute('href') == './src/assets/css/light.css') {
+          stylesheet.setAttribute('href', './src/assets/css/dark.css');
+          toggle.innerHTML = 'Dark';
+        } else {
+          stylesheet.setAttribute('href', './src/assets/css/light.css');
+          toggle.innerHTML = 'Light';
+        }
+      }
+    </script>
   </body>
 
 </html>

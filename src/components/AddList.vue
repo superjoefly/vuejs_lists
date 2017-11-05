@@ -1,5 +1,5 @@
 <template>
-  <div class="w3-light-grey" style="height: 100%">
+  <div class="w3-light-grey" style="height: 100vh;">
 
     <!-- Render Clock Component -->
     <app-clock></app-clock>
@@ -15,8 +15,7 @@
       @click="getList">Load</button>
     </div>
 
-    <div class="w3-container">
-
+    <div>
       <button class="w3-button w3-left w3-text-blue my-button" @click="getCompleted">Completed</button>
       <button class="w3-button w3-right w3-text-blue my-button" @click="clearCompleted">Clear Completed</button>
 
@@ -36,8 +35,6 @@
       <p v-if="error" class="w3-text-red w3-small">{{error}}</p>
 
       <!-- Render ListGrid.vue -->
-
-      <!-- CHILD -->
       <app-list-grid
       :list="list"
       @itemCompleted="markItem"

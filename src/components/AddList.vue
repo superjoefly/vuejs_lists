@@ -23,7 +23,7 @@
 
       <p class="w3-text-green save-note">Don't forget to save your list!</p>
 
-      <button class="w3-button w3-pale-blue w3-block save-button" @click="saveList"
+      <button class="w3-button w3-pale-green w3-block save-button" @click="saveList"
       >Save</button>
 
       <br><br>

@@ -35,7 +35,7 @@
         }, delay)
       },
       leave(el, done) {
-        var delay = el.dataset.index * 150;
+        var delay = el.dataset.index * 100;
         setTimeout(function() {
           Velocity(el, 'transition.whirlOut');
         }, delay)
@@ -43,14 +43,3 @@
     }
   }
 </script>
-
-<style>
-/*.list {
-   font-size: 18px;
-   font-family: 'Gloria Hallelujah', cursive;
-   word-wrap: break-word;
-   list-style-type: none;
-   margin: 0;
-   padding: 0;
-}*/
-</style>

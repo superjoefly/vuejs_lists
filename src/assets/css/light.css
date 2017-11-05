@@ -1,4 +1,6 @@
-
+html {
+  height: 100vh;
+}
 
 /*AddList.vue*/
 .message {
@@ -21,7 +23,7 @@
 }
 
 .w3-input {
-  border: none;
+  border: 2px solid #56dada;
 }
 
 .buttons {
@@ -44,6 +46,11 @@
    padding: 0;
 }
 
+li:hover {
+  cursor: pointer;
+  color: white;
+}
+
 /*ListGrid.vue*/
 .icon-container {
   position: relative;
@@ -62,11 +69,6 @@
 
 .marked {
   text-decoration: line-through;
-}
-
-span:hover:not(.clock) {
-  cursor: pointer;
-  color: white;
 }
 
 .clock {

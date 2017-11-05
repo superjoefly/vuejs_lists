@@ -5,7 +5,7 @@
     <app-add-list
     @itemAdded="addItem"
     @itemsCleared="removeItems"
-    @listUploaded="showList"
+    @updateList="updateList"
     @showCompleted="showCompleted"
     @clearCompleted="clearCompleted"
     :list="list"
@@ -25,10 +25,7 @@
 
     data() {
       return {
-        list: [
-          {name: 'Go to the store.', completed: true},
-          {name: 'Walk the dog.', completed: false}
-        ]
+        list: []
       }
     },
 
@@ -39,8 +36,8 @@
       removeItems() {
         this.list = [];
       },
-      showList(resultArray) {
-        this.list = resultArray;
+      updateList(listItems) {
+        this.list = listItems;
       },
       showCompleted(completed) {
         this.list = completed;
@@ -48,6 +45,22 @@
       clearCompleted() {
         this.list = this.list.filter(item => !item.completed);
       }
+    },
+
+    // Use localStorage for persistance
+    mounted() {
+      localStorage.setItem('storedList', JSON.stringify([
+        {name: 'Go to the store.', completed: true},
+        {name: 'Walk the dog.', completed: false}
+      ]));
+
+      let storageList = JSON.parse(localStorage.getItem('storedList'));
+
+      console.log(storageList);
+
+      this.list = storageList;
+
+      // localStorage.clear();
     }
 
   }

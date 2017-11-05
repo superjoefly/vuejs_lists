@@ -23,10 +23,6 @@ html {
   }
 }
 
-.w3-input {
-  border: 2px solid #56dada;
-}
-
 .buttons {
   width: 33.33%;
   float: left;
@@ -49,7 +45,6 @@ html {
 
 li:hover {
   cursor: pointer;
-  color: white;
 }
 
 /*ListGrid.vue*/

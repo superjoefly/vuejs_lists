@@ -56,8 +56,6 @@
 
       let storageList = JSON.parse(localStorage.getItem('storedList'));
 
-      console.log(storageList);
-
       this.list = storageList;
 
       // localStorage.clear();

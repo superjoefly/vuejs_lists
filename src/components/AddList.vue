@@ -24,11 +24,11 @@
       <p class="w3-text-green save-note">Don't forget to save your list!</p>
 
       <button class="w3-button w3-pale-green w3-block save-button" @click="saveList"
-      >Save</button>
+      >Save List</button>
 
       <br><br>
 
-      <div class="w3-panel w3-green w3-large message" v-if="saved">
+      <div class="w3-panel w3-green w3-large message" v-if="showMessage">
         <p>{{message}}</p>
       </div>
 
@@ -37,9 +37,11 @@
       <!-- Render ListGrid.vue -->
       <app-list-grid
       :list="list"
-      @itemCompleted="markItem"
       @itemDeleted="removeItem"
       ></app-list-grid>
+
+      <button class="w3-button w3-bottom w3-pale-blue w3-block save-button" style="margin-bottom: 40px;" @click="clearStorage"
+      >Clear Storage</button>
 
     </div>
 
@@ -65,7 +67,7 @@
         },
         message: '',
         error: '',
-        saved: false
+        showMessage: false
       }
     },
 
@@ -106,34 +108,40 @@
       hideMessage() {
         var vm = this;
         setTimeout(function() {
-          vm.saved = false;
+          vm.showMessage = false;
         }, 3000)
       },
 
       saveList() {
         localStorage.setItem('storedList', JSON.stringify(this.list));
+
         this.message = 'List Saved!';
-        this.saved = true;
+        this.showMessage = true;
         this.hideMessage();
         this.clearError();
       },
       getList() {
-        let listItems = JSON.parse(localStorage.getItem('storedList'));
+        let savedList = localStorage.getItem('storedList');
 
-        if (listItems = []) {
-          this.error = 'No items in storage!';
+        if (savedList == null || savedList == '[]') {
+          this.error = 'No Items in Storage';
         } else {
+          let listItems = JSON.parse(localStorage.getItem('storedList'));
           this.$emit('updateList', listItems);
         }
+      },
+
+      clearStorage() {
+        localStorage.clear();
+        this.message = 'Storage Cleared!';
+        this.showMessage = true;
+        this.hideMessage();
+        this.clearError();
       },
 
 
       removeItem(index) {
         this.list.splice(index, 1);
-      },
-      markItem(index) {
-        console.log('Marked!');
-        console.log(this.list[index]);
       },
 
       getCompleted() {

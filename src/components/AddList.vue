@@ -12,7 +12,7 @@
       <button class="w3-yellow w3-button buttons" @click="clearItems">Clear</button>
 
       <button class="w3-orange w3-button buttons"
-      @click="getList">All</button>
+      @click="getList">Load</button>
     </div>
 
     <div>

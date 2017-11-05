@@ -40,7 +40,7 @@
       @itemDeleted="removeItem"
       ></app-list-grid>
 
-      <button class="w3-button w3-bottom w3-pale-blue w3-block save-button" style="margin-bottom: 40px;" @click="clearStorage"
+      <button class="w3-button w3-bottom w3-pale-blue w3-block save-button" @click="clearStorage"
       >Clear Storage</button>
 
     </div>

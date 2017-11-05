@@ -16,9 +16,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- MyStyles -->
-    <link rel="stylesheet" id="stylesheet" href="./src/assets/css/light.css">
+    <link rel="stylesheet" id="stylesheet" href="./dist/css/light.css">
 
-    <link rel="stylesheet" href="./src/assets/css/nav.css">
+    <link rel="stylesheet" href="./dist/css/nav.css">
 
     <!-- Velocity.js -->
     <script src="https://cdn.jsdelivr.net/velocity/1.5/velocity.min.js"></script>
@@ -56,11 +56,11 @@
         let toggle = document.getElementById('toggle');
         let stylesheet = document.getElementById('stylesheet');
 
-        if (stylesheet.getAttribute('href') == './src/assets/css/light.css') {
-          stylesheet.setAttribute('href', './src/assets/css/dark.css');
+        if (stylesheet.getAttribute('href') == './dist/css/light.css') {
+          stylesheet.setAttribute('href', './dist/css/dark.css');
           toggle.innerHTML = 'Dark';
         } else {
-          stylesheet.setAttribute('href', './src/assets/css/light.css');
+          stylesheet.setAttribute('href', './dist/css/light.css');
           toggle.innerHTML = 'Light';
         }
       }

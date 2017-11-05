@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <!-- Transition Group (Unordered List) -->
     <app-list>
       <!-- Slotted Content (List Items) -->
@@ -40,14 +41,14 @@
 </script>
 
 <style scoped>
-.icon-container {
+/*.icon-container {
   position: relative;
 }
 
 .fa-close {
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 13px;
   cursor: pointer;
 }
 
@@ -58,5 +59,10 @@
 .marked {
   text-decoration: line-through;
 }
+
+span:hover {
+  cursor: pointer;
+  color: white;
+}*/
 
 </style>

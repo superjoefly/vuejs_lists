@@ -1,8 +1,10 @@
 <template>
 
-  <div class="w3-padding w3-text-blue">
-    <span id="date"></span>
-    <span id="timeclock"></span>
+  <div class="w3-text-blue">
+    <button class="w3-button w3-left">Light</button>
+      <span id="date" class="clock"></span>
+      <span id="timeclock" class="clock"></span>
+    <button class="w3-button w3-right">Dark</button>
   </div>
 
 
@@ -42,5 +44,3 @@
     }
   }
 </script>
-
-<style></style>

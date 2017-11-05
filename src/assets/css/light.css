@@ -1,0 +1,78 @@
+/*App.vue*/
+.container {
+  background-color: white !important;
+}
+
+/*AddList.vue*/
+.message {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 10;
+  width: 50%;
+  transform: translate(-50%, 20%);
+  animation: flash-message 3s forwards;
+}
+
+@keyframes flash-message {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0; display: none;
+  }
+}
+
+.w3-input {
+  border: none;
+}
+
+.buttons {
+  width: 33.33%;
+  float: left;
+}
+
+.my-button:hover {
+  background-color: transparent !important;
+  color: orange !important;
+}
+
+/*List.vue*/
+.list {
+   font-size: 18px;
+   font-family: 'Gloria Hallelujah', cursive;
+   word-wrap: break-word;
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+}
+
+/*ListGrid.vue*/
+.icon-container {
+  position: relative;
+}
+
+.fa-close {
+  position: absolute;
+  right: 10px;
+  top: 13px;
+  cursor: pointer;
+}
+
+.fa-close:hover {
+  color: red;
+}
+
+.marked {
+  text-decoration: line-through;
+}
+
+span:hover:not(.clock) {
+  cursor: pointer;
+  color: white;
+}
+
+.clock {
+  display: inline-block;
+  padding-top: 8px;
+}
